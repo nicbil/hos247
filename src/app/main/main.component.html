@@ -1,0 +1,49 @@
+<div class="controls">
+  <button mat-raised-button color="primary" routerLink="/containers">Add container</button>
+  <button mat-raised-button color="primary" routerLink="/things">Add thing</button>
+</div>
+
+<div class="wrap-items">
+  <div class="item">
+    <h2>Containers</h2>
+    <div *ngFor="let container of containers$ | async" draggable="true"
+         (dragend)="handleDragEndContainer(container)"
+         class="name"
+    >
+      {{ container.nameContainer }} - {{ container.volumeContainer }}
+    </div>
+  </div>
+
+  <div class="item">
+    <h2>Things</h2>
+    <div *ngFor="let thing of things$ | async" class="name">
+      {{ thing.nameThing }} - {{ thing.volumeThing }}
+    </div>
+  </div>
+</div>
+
+<ng-template #nodeTemplateRef let-node>
+  <div class="nodes">
+    <div class="node">
+      <div class="name-container" draggable="true" (dragover)="handleDragOverContainer(node)">
+        {{ node.nameContainer }} <span *ngIf="node.idContainer"> (volume - {{node.volumeContainer}})</span>
+      </div>
+      <button *ngIf="node.idContainer" mat-raised-button color="primary" (click)="removeContainer(node)" class="remove-container">
+        Remove container
+      </button>
+    </div>
+    <div class="name-thing" *ngFor="let things of node.things">
+      {{things.name}}
+    </div>
+    <div *ngIf="node.containers">
+      <ng-template ngFor [ngForOf]="node.containers" [ngForTemplate]="nodeTemplateRef"></ng-template>
+    </div>
+  </div>
+</ng-template>
+
+<div class="tree">
+  <ng-template
+    [ngTemplateOutlet]="nodeTemplateRef"
+    [ngTemplateOutletContext]="{ $implicit: treeModel.model }">
+  </ng-template>
+</div>

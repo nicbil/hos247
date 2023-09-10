@@ -1,0 +1,39 @@
+<button mat-raised-button color="primary" routerLink="" class="back-button">Back</button>
+<mat-card>
+  <mat-card-content>
+    <h1>Container</h1>
+    <form class="form-container" [formGroup]="containersForm" (ngSubmit)="createContainer()">
+      <mat-form-field>
+        <mat-label>Name container</mat-label>
+        <input matInput type="text" formControlName="nameContainer">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Volume container</mat-label>
+        <input matInput type="number" formControlName="volumeContainer">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Apply</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<ng-container [formGroup]="containersUpdateForm">
+  <div class="container" formArrayName="containers" *ngFor="let containerForm of containersArray.controls; let index = index">
+    <ng-container [formGroupName]="index">
+      <mat-form-field>
+        <mat-label>Name container</mat-label>
+        <input matInput type="text" formControlName="nameContainer">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Volume container</mat-label>
+        <input matInput type="text" formControlName="volumeContainer">
+      </mat-form-field>
+    </ng-container>
+
+    <button mat-raised-button color="primary" (click)="updateContainer(containerForm.value)">Seve</button>
+    <button mat-raised-button color="primary" (click)="deleteContainer(containerForm.value.idContainer)">Delete</button>
+  </div>
+</ng-container>
+

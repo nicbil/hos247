@@ -1,0 +1,48 @@
+:host {
+  display: block;
+  padding: 1rem;
+  .controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .wrap-items {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    .item {
+      width: 390px;
+      max-height: 150px;
+      overflow: scroll;
+      background-color: #E5EEF3;
+      padding: .5rem;
+      .name {
+        margin: .5rem;
+        padding: .5rem;
+        background-color: beige;
+        cursor: pointer;
+      }
+    }
+  }
+  .tree {
+    padding: 0.5rem;
+    background-color: #E5EEF3;
+    .nodes {
+      margin-left: .5rem;
+      .node {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .name-container {
+          margin: 0.1rem;
+          background-color: beige;
+          padding: 0.5rem;
+          display: block;
+        }
+        .remove-container {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
